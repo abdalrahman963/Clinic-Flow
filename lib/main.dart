@@ -1,3 +1,4 @@
+import 'package:clinic_flow/core/localization/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         // This is the theme of your application.
         //
