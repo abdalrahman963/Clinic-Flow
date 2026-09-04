@@ -6,12 +6,14 @@ class ReusableMapWidget extends StatelessWidget {
   final LatLng centerCoordinates;
   final double initialZoom;
   final List<Marker> markers;
+  final Function(LatLng)? onMapTap; // ADD THIS
 
   const ReusableMapWidget({
     super.key,
     required this.centerCoordinates,
-    this.initialZoom = 13.0,
+    this.initialZoom = 15.0,
     this.markers = const [],
+    this.onMapTap, // ADD THIS
   });
 
   @override
@@ -20,12 +22,19 @@ class ReusableMapWidget extends StatelessWidget {
       options: MapOptions(
         initialCenter: centerCoordinates,
         initialZoom: initialZoom,
+        minZoom: 5.0, // The user cannot zoom out further than city-level
+        maxZoom: 18.0, // The user cannot zoom in closer than building-level
+        // ADD THE onTap TRIGGER HERE:
+        onTap: (tapPosition, point) {
+          if (onMapTap != null) {
+            onMapTap!(point);
+          }
+        },
       ),
       children: [
         TileLayer(
-          // OpenStreetMap is the default, free tile provider
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
+          userAgentPackageName: 'com.clinic_flow.flutter_app',
         ),
         MarkerLayer(markers: markers),
       ],

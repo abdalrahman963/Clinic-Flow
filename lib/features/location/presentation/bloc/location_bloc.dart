@@ -9,21 +9,21 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
 
   LocationBloc({required this.getCurrentLocationUseCase}) : super(LocationInitial()) {
     on<GetUserLocationEvent>(_onGetUserLocation);
+    on<UpdateSelectedLocationEvent>(_onUpdateSelectedLocation);
   }
 
-  Future<void> _onGetUserLocation(
-    GetUserLocationEvent event,
-    Emitter<LocationState> emit,
-  ) async {
+  Future<void> _onGetUserLocation(GetUserLocationEvent event, Emitter<LocationState> emit) async {
     emit(LocationLoading());
 
-    // Because we used the call() method in our UseCase, we can invoke it like a function
     final failureOrLocation = await getCurrentLocationUseCase(NoParams());
 
-    // dartz fold() unwraps the Either: Left is Failure, Right is Success
     failureOrLocation.fold(
       (failure) => emit(LocationError(message: failure.message)),
-      (location) => emit(LocationLoaded(location: location)),
+      (location) => emit(LocationLoaded(selectedLocation: location)),
     );
+  }
+
+  void _onUpdateSelectedLocation(UpdateSelectedLocationEvent event, Emitter<LocationState> emit) {
+    emit(LocationLoaded(selectedLocation: event.newLocation));
   }
 }
