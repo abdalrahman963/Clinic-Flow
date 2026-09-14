@@ -1,5 +1,20 @@
 {
   "@@locale": "en",
   "appTitle": "Clinic Flow",
-  "welcomeMessage": "Welcome to Clinic Flow"
+  "welcomeMessage": "Welcome to Clinic Flow",
+  "locationPickerTitle": "Pick clinic location",
+  "locationPickerMyLocation": "My location",
+  "locationPickerLoadingMap": "Loading map…",
+  "locationPickerTapHint": "Tap the map to move the pin • Lat {lat}, Lng {lng}",
+  "@locationPickerTapHint": {
+    "placeholders": {
+      "lat": {
+        "type": "String"
+      },
+      "lng": {
+        "type": "String"
+      }
+    }
+  },
+  "locationPickerConfirm": "Confirm location"
 }

@@ -1,5 +1,13 @@
 {
     "@@locale": "ar",
   "appTitle": "كليك فلو",
-  "welcomeMessage": "مرحباً بك في كليك فلو"
+  "welcomeMessage": "مرحباً بك في كليك فلو",
+
+   "locationPickerTitle": "اختر موقع العيادة",
+  "locationPickerMyLocation": "موقعي",
+  "locationPickerLoadingMap": "جارٍ تحميل الخريطة…",
+  "locationPickerTapHint": "اضغط على الخريطة لتحريك الدبوس • خط العرض {lat}، خط الطول {lng}",
+  "@locationPickerTapHint": { "placeholders": { "lat": { "type": "String" }, "lng": { "type": "String" } } },
+  "locationPickerConfirm": "تأكيد الموقع"
+
 }

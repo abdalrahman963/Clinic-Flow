@@ -109,6 +109,8 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome to Clinic Flow'**
   String get welcomeMessage;
+
+  String get locationPickerTitle => null;
 }
 
 class _AppLocalizationsDelegate
