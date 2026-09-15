@@ -109,6 +109,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome to Clinic Flow'**
   String get welcomeMessage;
+
+  /// No description provided for @locationPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick clinic location'**
+  String get locationPickerTitle;
+
+  /// No description provided for @locationPickerMyLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'My location'**
+  String get locationPickerMyLocation;
+
+  /// No description provided for @locationPickerLoadingMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading map…'**
+  String get locationPickerLoadingMap;
+
+  /// No description provided for @locationPickerTapHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the map to move the pin • Lat {lat}, Lng {lng}'**
+  String locationPickerTapHint(String lat, String lng);
+
+  /// No description provided for @locationPickerConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm location'**
+  String get locationPickerConfirm;
+
+  /// No description provided for @commonTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get commonTryAgain;
 }
 
 class _AppLocalizationsDelegate
