@@ -3,6 +3,7 @@ import 'package:clinic_flow/features/location/domain/entities/location.dart';
 import 'package:clinic_flow/features/location/presentation/bloc/location_bloc.dart';
 import 'package:clinic_flow/features/location/presentation/bloc/location_event.dart';
 import 'package:clinic_flow/features/location/presentation/bloc/location_state.dart';
+import 'package:clinic_flow/features/location/presentation/widgets/reuseable_map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -62,7 +63,7 @@ class LocationPickerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loc = AppLocalizations.of(context)!;
+    final loc = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(

@@ -13,4 +13,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomeMessage => 'Welcome to Clinic Flow';
+
+  @override
+  String get locationPickerTitle => 'Pick clinic location';
+
+  @override
+  String get locationPickerMyLocation => 'My location';
+
+  @override
+  String get locationPickerLoadingMap => 'Loading map…';
+
+  @override
+  String locationPickerTapHint(String lat, String lng) {
+    return 'Tap the map to move the pin • Lat $lat, Lng $lng';
+  }
+
+  @override
+  String get locationPickerConfirm => 'Confirm location';
+
+  @override
+  String get commonTryAgain => 'Try again';
 }

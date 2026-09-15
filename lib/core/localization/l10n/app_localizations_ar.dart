@@ -13,4 +13,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get welcomeMessage => 'مرحباً بك في كليك فلو';
+
+  @override
+  String get locationPickerTitle => 'اختر موقع العيادة';
+
+  @override
+  String get locationPickerMyLocation => 'موقعي';
+
+  @override
+  String get locationPickerLoadingMap => 'جارٍ تحميل الخريطة…';
+
+  @override
+  String locationPickerTapHint(String lat, String lng) {
+    return 'اضغط على الخريطة لتحريك الدبوس • خط العرض $lat، خط الطول $lng';
+  }
+
+  @override
+  String get locationPickerConfirm => 'تأكيد الموقع';
+
+  @override
+  String get commonTryAgain => 'حاول مجدداً';
 }

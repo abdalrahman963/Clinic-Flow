@@ -16,5 +16,6 @@
       }
     }
   },
-  "locationPickerConfirm": "Confirm location"
+  "locationPickerConfirm": "Confirm location",
+  "commonTryAgain": "Try again"
 }

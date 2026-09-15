@@ -8,6 +8,7 @@
   "locationPickerLoadingMap": "جارٍ تحميل الخريطة…",
   "locationPickerTapHint": "اضغط على الخريطة لتحريك الدبوس • خط العرض {lat}، خط الطول {lng}",
   "@locationPickerTapHint": { "placeholders": { "lat": { "type": "String" }, "lng": { "type": "String" } } },
-  "locationPickerConfirm": "تأكيد الموقع"
+  "locationPickerConfirm": "تأكيد الموقع",
+  "commonTryAgain": "حاول مجدداً"
 
-}
+} 
