@@ -1,6 +1,7 @@
-import 'package:advanced_clinic_management_system_flutter/core/themes/color_manager.dart';
-import 'package:advanced_clinic_management_system_flutter/core/themes/font_manager.dart';
-import 'package:advanced_clinic_management_system_flutter/core/themes/values_manager.dart';
+
+import 'package:clinic_flow/core/theme/color_manager.dart';
+import 'package:clinic_flow/core/theme/font_manager.dart';
+import 'package:clinic_flow/core/theme/values_manager.dart';
 import 'package:flutter/material.dart';
 
 
