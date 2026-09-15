@@ -1,3 +1,5 @@
+import 'package:clinic_flow/core/preferences/user_preference_scope.dart';
+import 'package:clinic_flow/core/preferences/user_preferences_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
