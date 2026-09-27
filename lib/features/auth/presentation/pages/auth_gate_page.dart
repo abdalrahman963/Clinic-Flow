@@ -2,8 +2,7 @@ import 'package:clinic_flow/features/patient/patient_home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../doctor/presentation/pages/doctor_root_page.dart';
-import '../../../patient/presentation/pages/patient_root_page.dart';
+
 import '../../domain/entities/app_user.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_state.dart';
