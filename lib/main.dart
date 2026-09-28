@@ -1,31 +1,37 @@
-import 'package:clinic_flow/dashboard_temp.dart';
 import 'package:flutter/material.dart';
-import 'package:clinic_flow/core/localization/l10n/app_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'injection_container.dart' as di;
+import 'features/auth/presentation/pages/auth_gate_page.dart';
+import 'injection_container.dart';
+import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/auth/presentation/bloc/auth_event.dart';
 
-void main()async {
-   WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  // Ensure Flutter bindings are initialized before doing async work in main
+  WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize our Dependency Injection container
   await di.init();
-  runApp(const MyApp());
+
+  runApp(const AdvancedClinicApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AdvancedClinicApp extends StatelessWidget {
+  const AdvancedClinicApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Clinic Flow',
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return BlocProvider(
+      create: (_) => sl<AuthBloc>()..add(const AuthAppStartedEvent()),
+      child: MaterialApp(
+        title: 'Advanced Clinic Management',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          useMaterial3: true,
+        ),
+        home: const AuthGatePage(),
       ),
-      home: const DashboardPage(),
     );
   }
 }
