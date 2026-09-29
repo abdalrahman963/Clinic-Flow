@@ -11,7 +11,7 @@ class AuthSessionModel extends AuthSession {
   factory AuthSessionModel.fromJson(Map<String, dynamic> json) {
     return AuthSessionModel(
       token: (json['token'] ?? '').toString(),
-      tokenType: (json['token_type'] ?? 'bearer').toString(),
+      tokenType: (json['token_type'] ?? 'Bearer').toString(), // Provides default 'Bearer' if missing
       user: AppUserModel.fromJson((json['user'] as Map?)?.cast<String, dynamic>() ?? const {}),
     );
   }
@@ -25,7 +25,9 @@ class AuthSessionModel extends AuthSession {
           'email': user.email,
           'status': user.status,
           'role': user.role.name,
+          'phone': user.phone, // Include new fields in cache[cite: 8]
+          'age': user.age,
+          'gender': user.gender,
         },
       };
 }
-

@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/auth_session.dart';
-
 import '../datasources/auth_local_data_source.dart';
 import '../datasources/auth_remote_data_source.dart';
 
@@ -57,6 +56,39 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(null);
     } catch (_) {
       return const Left(ServerFailure('Failed to logout.'));
+    }
+  }
+  @override
+  Future<Either<Failure, AuthSession>> register({
+    required String name,
+    required String email,
+    required String password,
+    required String role,
+    required String phone,
+    required int age,
+    required String gender,
+  }) async {
+    try {
+      final session = await remote.register(
+        name: name,
+        email: email,
+        password: password,
+        role: role,
+        phone: phone,
+        age: age,
+        gender: gender,
+      );
+      
+      // We explicitly save the token to local storage so the user is instantly logged in
+      await local.cacheSession(session);
+      
+      return Right(session);
+    } on ApiException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on ServerException {
+      return const Left(ServerFailure('Server error.'));
+    } catch (_) {
+      return const Left(ServerFailure('Registration failed.'));
     }
   }
 }
