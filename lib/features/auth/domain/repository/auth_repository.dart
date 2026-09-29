@@ -9,8 +9,18 @@ abstract class AuthRepository {
     required String password,
   });
 
+  // --- NEW: Register Method ---
+  Future<Either<Failure, AuthSession>> register({
+    required String name,
+    required String email,
+    required String password,
+    required String role,
+    required String phone,
+    required int age,
+    required String gender,
+  });
+
   Future<Either<Failure, AuthSession?>> getCachedSession();
 
   Future<Either<Failure, void>> logout();
 }
-
