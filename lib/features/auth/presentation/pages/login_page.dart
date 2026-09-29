@@ -1,3 +1,4 @@
+import 'package:clinic_flow/features/auth/presentation/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -184,7 +185,13 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       const Text("Don't have an account? ", style: TextStyle(color: Color(0xFF64748B))),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // ---  Navigate to Register Page ---
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const RegisterPage()),
+                          );
+                        },
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(color: Color(0xFF0284C7), fontWeight: FontWeight.w900),
