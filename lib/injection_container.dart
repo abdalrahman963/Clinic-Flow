@@ -9,10 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/auth/data/datasources/auth_local_data_source.dart';
 import 'features/auth/data/datasources/auth_remote_data_source.dart';
-
 import 'features/auth/domain/usecases/get_cached_session_usecase.dart';
 import 'features/auth/domain/usecases/login_usecase.dart';
 import 'features/auth/domain/usecases/logout_usecase.dart';
+import 'features/auth/domain/usecases/register_usecase.dart'; // <-- 1. NEW IMPORT
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/doctor/data/repositories/doctor_repository_impl.dart';
 import 'features/doctor/domain/repositories/doctor_repository.dart';
@@ -85,10 +85,12 @@ Future<void> init() async {
       getCachedSessionUseCase: sl(),
       loginUseCase: sl(),
       logoutUseCase: sl(),
+      registerUseCase: sl(), // <-- 2. INJECT NEW USECASE
     ),
   );
 
   sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton(() => RegisterUseCase(sl())); 
   sl.registerLazySingleton(() => GetCachedSessionUseCase(sl()));
   sl.registerLazySingleton(() => LogoutUseCase(sl()));
 

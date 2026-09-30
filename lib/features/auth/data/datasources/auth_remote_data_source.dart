@@ -13,6 +13,15 @@ abstract class AuthRemoteDataSource {
   });
 
   Future<void> logout({required String token});
+  Future<AuthSessionModel> register({
+    required String name,
+    required String email,
+    required String password,
+    required String role,
+    required String phone,
+    required int age,
+    required String gender,
+  });
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -89,6 +98,63 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final msg = (jsonMap?['message'] ?? 'Logout failed.').toString();
       throw ApiException(message: msg, statusCode: res.statusCode);
     }
+  }
+  @override
+  Future<AuthSessionModel> register({
+    required String name,
+    required String email,
+    required String password,
+    required String role,
+    required String phone,
+    required int age,
+    required String gender,
+  }) async {
+    final uri = Uri.parse('${ApiConfig.baseUrl}/register');
+    http.Response res;
+    try {
+      res = await client.post(
+        uri,
+        headers: const {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'name': name,
+          'email': email,
+          'password': password,
+          'role': role,
+          'phone': phone,
+          'age': age,
+          'gender': gender,
+        }),
+      );
+    } catch (e) {
+      throw ApiException(message: 'Network error. Check base URL and connection.');
+    }
+
+    Map<String, dynamic>? jsonMap;
+    try {
+      jsonMap = json.decode(res.body) as Map<String, dynamic>;
+    } catch (_) {
+      jsonMap = null;
+    }
+
+    // Success is usually 200 or 201 for creation
+    if (res.statusCode != 200 && res.statusCode != 201) {
+      final msg = (jsonMap?['message'] ?? 'Registration failed.').toString();
+      throw ApiException(message: msg, statusCode: res.statusCode);
+    }
+
+    if (jsonMap == null) {
+      throw ApiException(message: 'Invalid server response.', statusCode: res.statusCode);
+    }
+
+    // Handle the nested "original" payload from your specific backend setup
+    final dataMap = jsonMap['original'] != null 
+        ? (jsonMap['original'] as Map<String, dynamic>) 
+        : jsonMap;
+
+    return AuthSessionModel.fromJson(dataMap);
   }
 }
 
