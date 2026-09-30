@@ -3,6 +3,12 @@ import 'package:clinic_flow/features/auth/domain/repository/auth_repository.dart
 import 'package:clinic_flow/features/doctor/data/datasources/doctor_remote_datasource.dart';
 import 'package:clinic_flow/features/location/data/repository/location_repository_impl.dart';
 import 'package:clinic_flow/features/location/domain/repository/location_repository.dart';
+import 'package:clinic_flow/features/shared/data/datasources/shared_remote_data_source.dart';
+import 'package:clinic_flow/features/shared/data/repositories/shared_repository_impl.dart';
+import 'package:clinic_flow/features/shared/domain/repositories/shared_repository.dart';
+import 'package:clinic_flow/features/shared/domain/usecases/get_governates_usecase.dart';
+import 'package:clinic_flow/features/shared/domain/usecases/get_specializations_usecase.dart';
+import 'package:clinic_flow/features/shared/presentation/bloc/shared_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +30,6 @@ import 'features/location/data/datasources/location_remote_data_source.dart';
 
 import 'features/location/domain/usecases/get_current_location_usecase.dart';
 import 'features/location/presentation/bloc/location_bloc.dart';
-
 final sl = GetIt.instance; // sl stands for Service Locator
 
 Future<void> init() async {
@@ -42,7 +47,7 @@ Future<void> init() async {
 
   // Use Cases (LazySingletons are only created when they are first requested)
   sl.registerLazySingleton(() => GetCurrentLocationUseCase(sl()));
-  
+
   // Repository (Bind the abstract interface to the actual implementation)
   sl.registerLazySingleton<LocationRepository>(
     () => LocationRepositoryImpl(remoteDataSource: sl()),
@@ -104,5 +109,31 @@ Future<void> init() async {
 
   sl.registerLazySingleton<AuthLocalDataSource>(
     () => AuthLocalDataSourceImpl(prefs: sl()),
+  );
+
+  // ==========================================
+  // Feature: Shared (Lookups like Governates & Specializations)
+  // ==========================================
+
+  // Bloc
+  sl.registerFactory(
+    () => SharedBloc(
+      getGovernatesUseCase: sl(),
+      getSpecializationsUseCase: sl(),
+    ),
+  );
+
+  // Use Cases
+  sl.registerLazySingleton(() => GetGovernatesUseCase(sl()));
+  sl.registerLazySingleton(() => GetSpecializationsUseCase(sl()));
+
+  // Repository
+  sl.registerLazySingleton<SharedRepository>(
+    () => SharedRepositoryImpl(remoteDataSource: sl()),
+  );
+
+  // Data Sources
+  sl.registerLazySingleton<SharedRemoteDataSource>(
+    () => SharedRemoteDataSourceImpl(client: sl(), prefs: sl()),
   );
 }

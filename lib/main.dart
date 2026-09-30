@@ -1,3 +1,4 @@
+import 'package:clinic_flow/features/shared/presentation/bloc/shared_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'injection_container.dart' as di;
@@ -19,16 +20,24 @@ void main() async {
 class AdvancedClinicApp extends StatelessWidget {
   const AdvancedClinicApp({super.key});
 
-  @override
+ @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<AuthBloc>()..add(const AuthAppStartedEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (_) => sl<AuthBloc>()..add(const AuthAppStartedEvent()),
+        ),
+        // --- INJECT THE SHARED BLOC GLOBALLY ---
+        BlocProvider<SharedBloc>(
+          create: (_) => sl<SharedBloc>(),
+        ),
+        // ... (your other Blocs like LocationBloc or DoctorDashboardBloc)
+      ],
       child: MaterialApp(
-        title: 'Advanced Clinic Management',
+        title: 'Advanced Clinic',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-          useMaterial3: true,
+          // Your theme settings
         ),
         home: const AuthGatePage(),
       ),
