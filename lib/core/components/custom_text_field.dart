@@ -1,11 +1,12 @@
 import 'package:clinic_flow/core/theme/color_manager.dart';
 import 'package:clinic_flow/core/theme/font_manager.dart';
 import 'package:clinic_flow/core/theme/styles_manager.dart';
-import 'package:clinic_flow/core/theme/values_manager.dart';
 import 'package:flutter/material.dart';
 
+
+
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller; // <-- Here is how the page controls it!
+  final TextEditingController controller;
   final String hintText;
   final IconData? prefixIcon;
   final bool isPassword;
@@ -32,32 +33,37 @@ class CustomTextField extends StatelessWidget {
       style: getRegularStyle(color: ColorManager.black, fontSize: FontSize.s16),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+        // Matching the grey hint text from the login page
+        hintStyle: const TextStyle(color: Color(0xFF94A3B8), fontSize: 14), 
         prefixIcon: prefixIcon != null 
-            ? Icon(prefixIcon, color: ColorManager.primary) 
+            ? Icon(prefixIcon, color: const Color(0xFF64748B)) // Grey icon matching login
             : null,
         
-        // --- Styling the borders ---
+        // --- Identical Login Page Styling ---
         filled: true,
-        fillColor: ColorManager.white,
-        contentPadding: const EdgeInsets.all(AppPadding.p16),
+        fillColor: const Color(0xFFF1F5F9), // Soft grey background
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         
-        // Default border
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s12),
-          borderSide: BorderSide(color: ColorManager.lightGrey, width: 1),
+        // Default border matches the _TextFieldCard
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: Color(0xFFE2E8F0), width: 1),
         ),
         
-        // Border when the user clicks on it
+        // When clicked, it highlights with the primary blue
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s12),
-          borderSide: BorderSide(color: ColorManager.primary, width: 2),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: Color(0xFF0284C7), width: 2),
         ),
         
-        // Border when validation fails
+        // Error state border
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppSize.s12),
-          borderSide: BorderSide(color: ColorManager.error, width: 1),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: Color(0xFF9F1239), width: 1),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: Color(0xFF9F1239), width: 2),
         ),
       ),
     );
