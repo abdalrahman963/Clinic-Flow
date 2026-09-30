@@ -14,10 +14,32 @@ class ServerFailure extends Failure {
   const ServerFailure([super.message = 'A server error occurred.']);
 }
 
+// --- NEW FAILURES ---
+class CacheFailure extends Failure {
+  const CacheFailure([super.message = 'A local storage error occurred.']);
+}
+
+class NetworkFailure extends Failure {
+  const NetworkFailure([
+    super.message = 'Please check your internet connection.',
+  ]);
+}
+
+class UnauthorizedFailure extends Failure {
+  const UnauthorizedFailure([
+    super.message = 'Your session has expired. Please log in again.',
+  ]);
+}
+
+// --- EXISTING FAILURES ---
 class LocationPermissionFailure extends Failure {
-  const LocationPermissionFailure([super.message = 'Location permissions were denied.']);
+  const LocationPermissionFailure([
+    super.message = 'Location permissions were denied.',
+  ]);
 }
 
 class LocationDisabledFailure extends Failure {
-  const LocationDisabledFailure([super.message = 'Location services are disabled.']);
+  const LocationDisabledFailure([
+    super.message = 'Location services are disabled.',
+  ]);
 }

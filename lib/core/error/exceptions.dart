@@ -1,5 +1,11 @@
 class ServerException implements Exception {}
 
+// --- NEW EXCEPTIONS ---
+class CacheException implements Exception {}
+
+class UnauthorizedException implements Exception {}
+
+// --- EXISTING EXCEPTIONS ---
 class LocationPermissionException implements Exception {}
 
 class LocationDisabledException implements Exception {}
